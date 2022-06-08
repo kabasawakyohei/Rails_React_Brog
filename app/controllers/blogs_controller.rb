@@ -11,6 +11,7 @@ class BlogsController < ApplicationController
   end
 
   def create
+    Rails.logger.debug "----------- 作成API叩いたよ -------------"
     Blog.create(blog_params)
     # :createdは201を返す
     head :created
