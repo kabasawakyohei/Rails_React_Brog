@@ -20,6 +20,18 @@ test:
   <<: *default
   database: db/test.sqlite3
 
+# デフォルトの本番環境設定　本番環境はmysqlを使うため書き換える
+# production:
+#   <<: *default
+#   database: db/production.sqlite3
+
+# 本番環境のDBをmysqlに変更
 production:
-  <<: *default
-  database: db/production.sqlite3
+  adapter: mysql2
+  encoding: utf8mb4
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV['DB_HOST'] %>
+  socket: <%= ENV['DB_SOCKET'] %>
+  database: blog_api_production
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
